@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     secondBtn.addEventListener("click", () => {
         if (secondInput.value) {
+            // JEDIDIAH
             userSearch = secondInput.value;
             document.querySelector('.cards').innerHTML = ""
             retrieveOutput(userSearch)
@@ -49,15 +50,37 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text === "Search" && searchBox.value) {
             firstContainer.style.display = "none";
             secondContainer.style.display = "flex";
+            // JEDIDIAH
             userSearch = searchBox.value;
             document.querySelector('.cards').innerHTML = ""
             retrieveOutput(userSearch)
+            document.querySelector('.overLay').style.display = 'flex'
+
+            setInterval( () =>{
+                const resultCount = document.querySelector('.cards').childElementCount
+                if (resultCount > 0) {
+                    document.querySelector('.overLay').style.display = 'none'
+                }
+            }, 1000)
+
+            setTimeout( ()=> {
+                document.querySelector('.overLay_Btn').style.display = 'block'
+            }, 20000)
+
         } 
         else {
             firstContainer.style.display = "flex";
             secondContainer.style.display = "none";
         }
     });
+
+    document.querySelector('.overLay_Btn').addEventListener('click', () => {
+        document.querySelector('.overLay').style.display = 'none';
+        secondContainer.style.display = "none";
+        firstContainer.style.display = "flex";
+        searchBox.value = ""
+        document.querySelector('.overLay_Btn').style.display = 'none'
+    })
 
 
 
@@ -107,8 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(`/display_search/${query}`)
         .then(response => response.json())
         .then(data => {
+            console.log(data)
+            console.log(`/display_search/${query}`)
             if(data.status){
                 alert(data.message)
+                document.querySelector('.overLay_Btn').style.display = 'block'
             }
             else{
                 const results_data = data

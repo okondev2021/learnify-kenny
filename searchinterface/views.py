@@ -25,7 +25,7 @@ def display_search(request, userinput):
             # 
             result_1 = wikipedia.page(search_results[0])
             result_2 = wikipedia.page(search_results[random.randint(1, 5)])
-            result_3 = wikipedia.page(search_results[random.randint(6, 10)])
+            result_3 = wikipedia.page(search_results[random.randint(6, 8)])
             pages_list = [result_1, result_2, result_3]
             # 
             for result in pages_list:
